@@ -1,10 +1,9 @@
 import React, {FC} from 'react';
 
 const MainPage: FC = () => {
+
   return(
-    <div>
-      Главная страница
-    </div>
+    <div>main page</div>
   )
 };
 

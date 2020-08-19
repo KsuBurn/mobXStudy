@@ -1,0 +1,15 @@
+.wrap {
+    width: 100%;
+}
+
+.tableHead {
+    border-top: solid gray 1px;
+    border-bottom: solid gray 1px;
+    height: 50px;
+    text-align: center;
+}
+
+.tableSearch {
+    border-bottom: solid gray 1px;
+    height: 50px;
+}
