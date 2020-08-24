@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import userListHead from './userListHead.json';
 import UserRowItem from '../UserRowItem/UserRowItem';
 import {UserRowItemProps} from '../UserRowItem/UserRowItem';
@@ -6,13 +6,20 @@ import style from './UserList.module.css';
 import {Button, Input} from 'antd';
 import {useStore} from '../../hooks/useStore';
 import { observer } from 'mobx-react';
+import {autorun} from 'mobx';
 
 const UserList: FC = observer(() => {
-  const { userList } = useStore();
-  const [users] = useState(userList.userList)
+  const { usersStore } = useStore();
+
+  useEffect(() => {
+
+    autorun(() => {
+      usersStore.userState();
+    })
+  },[])
 
   const UsersRow = () => {
-    return users.slice().map((item: UserRowItemProps, index: number) => {
+    return usersStore.userList.slice().map((item: UserRowItemProps, index: number) => {
       return (
         <UserRowItem
           key={index}
@@ -20,6 +27,12 @@ const UserList: FC = observer(() => {
         />
       )
     })
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const {value, placeholder} = event.target;
+
+    usersStore.updateFilter(value, placeholder);
   };
 
   return (
@@ -38,8 +51,11 @@ const UserList: FC = observer(() => {
       <tbody>
         <tr className={style.tableSearch}>
           {userListHead.map(item => (
-            <td>
-              <Input placeholder={item.title}/>
+            <td key={item.title}>
+              <Input
+                placeholder={item.title}
+                onChange={handleChange}
+              />
             </td>
           ))}
         </tr>
