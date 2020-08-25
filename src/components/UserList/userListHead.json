@@ -1,14 +1,18 @@
 [
   {
-    "title": "#"
+    "title": "#",
+    "name": "#"
   },
   {
-    "title": "Full Name"
+    "title": "Full Name",
+    "name": "name"
   },
   {
-    "title": "Nick Name"
+    "title": "Nick Name",
+    "name": "username"
   },
   {
-    "title": "Email"
+    "title": "Email",
+    "name": "email"
   }
 ]

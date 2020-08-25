@@ -30,9 +30,9 @@ const UserList: FC = observer(() => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const {value, placeholder} = event.target;
-
-    usersStore.updateFilter(value, placeholder);
+    const {value, name} = event.target;
+console.log(name)
+    usersStore.updateFilter(value, name);
   };
 
   return (
@@ -53,6 +53,7 @@ const UserList: FC = observer(() => {
           {userListHead.map(item => (
             <td key={item.title}>
               <Input
+                name={item.name}
                 placeholder={item.title}
                 onChange={handleChange}
               />

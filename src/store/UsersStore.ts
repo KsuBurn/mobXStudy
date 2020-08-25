@@ -79,26 +79,21 @@ export class UsersStore implements UsersStoreType {
   filteredUsers(): UserType[] {
     const matchesFilter = new RegExp(this.filter, 'i');
 
-    const filteredUserList = this.fullUserList.slice().filter((item): UserType[] | boolean => {
-      switch (this.inputName) {
-        case 'Full Name':
-          return !this.filter || matchesFilter.test(item.name);
-        case 'Nick Name':
-          return !this.filter || matchesFilter.test(item.username);
-        case 'Email':
-          return !this.filter || matchesFilter.test(item.email);
-        default:
-          return this.userList;
+    const filteredUserList = this.fullUserList.slice().filter((item): boolean => {
+      if(this.filter) {
+        // @ts-ignore
+        return matchesFilter.test(item[this.inputName]);
       }
+      return true;
     });
     this.userList = filteredUserList;
     return this.userList
   };
 
   @action
-  updateFilter =  (inputValue: string, placeholder: string) => {
+  updateFilter =  (inputValue: string, inputName: string) => {
     this.filter = inputValue;
-    this.inputName = placeholder;
+    this.inputName = inputName;
     this.filteredUsers();
   };
 
