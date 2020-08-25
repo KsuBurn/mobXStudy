@@ -3,10 +3,5 @@
     "page": "Список пользователей",
     "icon": "hhh",
     "path": "/user_list"
-  },
-  {
-    "page": "Пользователь",
-    "icon": "hhh",
-    "path": "/user"
   }
 ]

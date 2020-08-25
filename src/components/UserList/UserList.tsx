@@ -5,19 +5,12 @@ import {UserRowItemProps} from '../UserRowItem/UserRowItem';
 import style from './UserList.module.css';
 import {Button, Input} from 'antd';
 import {useStore} from '../../hooks/useStore';
-import { observer } from 'mobx-react';
+import {observer} from 'mobx-react';
 import {autorun} from 'mobx';
 
 const UserList: FC = observer(() => {
-  const { usersStore } = useStore();
+  const {usersStore} = useStore();
   const [isDirectSorting, setIsDirectSorting] = useState(true);
-
-  useEffect(() => {
-
-    autorun(() => {
-      usersStore.userState();
-    })
-  },[])
 
   const UsersRow = () => {
     return usersStore.userList.slice().map((item: UserRowItemProps, index: number) => {
@@ -77,17 +70,17 @@ const UserList: FC = observer(() => {
       </tr>
       </thead>
       <tbody>
-        <tr className={style.tableSearch}>
-          {userListHead.map(item => (
-            <td key={item.title}>
-              <Input
-                name={item.name}
-                placeholder={item.title}
-                onChange={handleChange}
-              />
-            </td>
-          ))}
-        </tr>
+      <tr className={style.tableSearch}>
+        {userListHead.map(item => (
+          <td key={item.title}>
+            <Input
+              name={item.name}
+              placeholder={item.title}
+              onChange={handleChange}
+            />
+          </td>
+        ))}
+      </tr>
       {UsersRow()}
       </tbody>
     </table>

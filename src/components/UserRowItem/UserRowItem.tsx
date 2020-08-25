@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import style from './UserRowItem.module.css';
+import {NavLink} from 'react-router-dom';
 
 export type UserRowItemProps = {
   address: {
@@ -23,13 +24,6 @@ export type UserRowItemProps = {
   phone: string;
   username: string;
   website: string;
-  // guid: string;
-  // age: number;
-  // name: {
-  //   first: string;
-  //   last: string;
-  // };
-  // email: string;
 };
 
 export type UserRowItemType = {
@@ -37,15 +31,20 @@ export type UserRowItemType = {
 }
 
 const UserRowItem: FC<UserRowItemType> = ({item}: UserRowItemType) => {
+
+  const changeUser = (id: number) => {
+    window.location.href = `${window.location.origin}/user/${id}`;
+  };
+
   return (
-    <tr className={style.row}>
-      <td></td>
+    <tr
+      className={style.row}
+      onClick={()=> changeUser(item.id)}
+    >
+      <td>{item.id}</td>
       <td>{item.name}</td>
       <td>{item.username}</td>
       <td>{item.email}</td>
-      {/*<td>{item.name.first}</td>*/}
-      {/*<td>{item.name.last}</td>*/}
-      {/*<td>{item.age}</td>*/}
     </tr>
   );
 };

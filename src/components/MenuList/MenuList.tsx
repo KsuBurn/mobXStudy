@@ -16,7 +16,7 @@ const MenuList: FC = () => {
     <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
       <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         {menuList.map(item => (
-          <Menu.Item key={item.page} icon={<PieChartOutlined/>}>
+          <Menu.Item key={item.page} icon={<PieChartOutlined />}>
             <NavLink to={item.path}>{item.page}</NavLink>
           </Menu.Item>
         ))}

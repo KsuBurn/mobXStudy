@@ -1,8 +1,6 @@
-import {observable, action, extendObservable} from 'mobx';
-import users from '../mocks/users.json';
-import {act} from 'react-dom/test-utils';
+import {observable, action} from 'mobx';
 
-type UserType = {
+export type UserType = {
   address: {
     street: string;
     suite: string;
@@ -24,16 +22,10 @@ type UserType = {
   phone: string;
   username: string;
   website: string;
-  // guid: string;
-  // age: number;
-  // name: {
-  //   first: string;
-  //   last: string;
-  // };
-  // email: string;
-}
+};
 
 export type UsersStoreType = {
+  fullUserList: UserType[];
   userList: UserType[];
   userState: () => Promise<UserType[]>;
   updateFilter: (inputValue: string, placeholder: string) => void;
@@ -55,16 +47,17 @@ export class UsersStore implements UsersStoreType {
     const response = await request.json();
     this.fullUserList = response;
     await action(() => this.userList = response)();
+    this.saveLocal()
 
     return this.userList;
   }
 
 
-  // saveLocal() {
-  //   const lst = typeof localStorage === 'undefined' ? { users: {} } : localStorage;
-  //
-  //   lst.users = JSON.stringify(this.userList);
-  // }
+  saveLocal() {
+    const lst = typeof localStorage === 'undefined' ? { users: {} } : localStorage;
+
+    lst.users = JSON.stringify(this.userList);
+  }
   //
   // @action
   // addUserItem = (userItem: object): void => {
