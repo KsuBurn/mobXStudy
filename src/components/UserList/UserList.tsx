@@ -10,6 +10,7 @@ import {autorun} from 'mobx';
 
 const UserList: FC = observer(() => {
   const { usersStore } = useStore();
+  const [isDirectSorting, setIsDirectSorting] = useState(true);
 
   useEffect(() => {
 
@@ -31,8 +32,31 @@ const UserList: FC = observer(() => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const {value, name} = event.target;
-console.log(name)
+
     usersStore.updateFilter(value, name);
+  };
+
+  const handleSort = (event: React.MouseEvent<HTMLButtonElement>) => {
+    let sortValueA: object;
+    let sortValueB: object;
+
+    const sortUsers = usersStore.userList.slice().sort((a: any, b: any) => {
+      sortValueA = a[event.currentTarget.name];
+      sortValueB = b[event.currentTarget.name];
+
+      if (sortValueA < sortValueB) {
+        return isDirectSorting ? -1 : 1;
+      }
+
+      if (sortValueA > sortValueB) {
+        return isDirectSorting ? 1 : -1;
+      }
+
+      return 0;
+    });
+
+    usersStore.sortUsers(sortUsers);
+    setIsDirectSorting(!isDirectSorting);
   };
 
   return (
@@ -41,7 +65,11 @@ console.log(name)
       <tr className={style.tableHead}>
         {userListHead.map(item => (
           <th key={item.title}>
-            <Button>
+            <Button
+              htmlType='button'
+              name={item.name}
+              onClick={handleSort}
+            >
               {item.title}
             </Button>
           </th>

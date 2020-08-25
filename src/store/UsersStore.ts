@@ -38,6 +38,7 @@ export type UsersStoreType = {
   userState: () => Promise<UserType[]>;
   updateFilter: (inputValue: string, placeholder: string) => void;
   filteredUsers: () => UserType[];
+  sortUsers: (sortedArray: UserType[]) => void;
 }
 
 export class UsersStore implements UsersStoreType {
@@ -48,7 +49,6 @@ export class UsersStore implements UsersStoreType {
   filter: string = '';
   inputName: string = '';
 
-  // @ts-ignore
   @action
   userState = async () => {
     const request = await fetch('https://jsonplaceholder.typicode.com/users/');
@@ -97,6 +97,12 @@ export class UsersStore implements UsersStoreType {
     this.filteredUsers();
   };
 
+  @action
+  sortUsers =  (sortedArray: UserType[]) => {
+
+    this.userList = sortedArray;
+  };
+
   // Добавить функцию удаления
   // @action
   // deleteUser = (userId: number) => {
@@ -126,9 +132,5 @@ export class UsersStore implements UsersStoreType {
   // };
   //
 
-  //
-  // @action
-  // sortUsers =  (sortedArray: itemKeys[]) => {
-  //   this.users = sortedArray;
-  // };
+
 }
