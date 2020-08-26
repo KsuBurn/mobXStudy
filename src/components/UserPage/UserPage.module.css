@@ -1,0 +1,70 @@
+p {
+    margin: 0;
+}
+
+.userInfo {
+    display: grid;
+    grid-template-columns: 320px 25% 33%;
+    grid-template-rows: 50px repeat(5, 35px);
+}
+
+.avatar {
+    max-width: 300px;
+    object-fit: cover;
+    grid-column: 1 / 2;
+    grid-row: 1 / 6;
+
+}
+
+.emailTitle {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    align-self: center;
+}
+
+.email {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    align-self: center;
+}
+
+.addressTitle {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    align-self: center;
+}
+
+.address {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+    align-self: center;
+}
+
+.jobTitle {
+    grid-column: 2 / 3;
+    grid-row: 4 / 5;
+    align-self: center;
+}
+
+.job {
+    grid-column: 3 / 4;
+    grid-row: 4 / 5;
+    align-self: center;
+}
+
+.websiteTitle {
+    grid-column: 2 / 3;
+    grid-row: 5 / 6;
+    align-self: center;
+}
+
+.website {
+    grid-column: 3 / 4;
+    grid-row: 5 / 6;
+    align-self: center;
+}
+
+.buttonWrap {
+    display: flex;
+    justify-content: flex-end;
+}

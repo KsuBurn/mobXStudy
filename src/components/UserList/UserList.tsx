@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import userListHead from './userListHead.json';
 import UserRowItem from '../UserRowItem/UserRowItem';
 import {UserRowItemProps} from '../UserRowItem/UserRowItem';
@@ -6,7 +6,6 @@ import style from './UserList.module.css';
 import {Button, Input} from 'antd';
 import {useStore} from '../../hooks/useStore';
 import {observer} from 'mobx-react';
-import {autorun} from 'mobx';
 
 const UserList: FC = observer(() => {
   const {usersStore} = useStore();

@@ -7,3 +7,18 @@
     cursor: pointer;
     background: #dbdbdb;
 }
+
+.cell {
+    height: inherit;
+}
+
+.rowLink {
+    color: #000;
+    height: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.rowLink:hover {
+    color: #000;
+}

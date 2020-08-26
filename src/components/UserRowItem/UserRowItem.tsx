@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import style from './UserRowItem.module.css';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 export type UserRowItemProps = {
   address: {
@@ -18,6 +18,7 @@ export type UserRowItemProps = {
     catchPhrase: string;
     bs: string;
   };
+  avatar: string;
   email: string;
   id: number;
   name: string;
@@ -32,20 +33,42 @@ export type UserRowItemType = {
 
 const UserRowItem: FC<UserRowItemType> = ({item}: UserRowItemType) => {
 
-  const changeUser = (id: number) => {
-    window.location.href = `${window.location.origin}/user/${id}`;
-  };
-
   return (
-    <tr
-      className={style.row}
-      onClick={()=> changeUser(item.id)}
-    >
-      <td>{item.id}</td>
-      <td>{item.name}</td>
-      <td>{item.username}</td>
-      <td>{item.email}</td>
+    <tr className={style.row}>
+      <td className={style.cell}>
+        <Link
+          to={`/user/${item.id}`}
+          className={style.rowLink}
+        >
+          {item.id}
+        </Link>
+      </td>
+      <td className={style.cell}>
+        <Link
+          to={`/user/${item.id}`}
+          className={style.rowLink}
+        >
+          {item.name}
+        </Link>
+      </td>
+      <td className={style.cell}>
+        <Link
+          to={`/user/${item.id}`}
+          className={style.rowLink}
+        >
+          {item.username}
+        </Link>
+      </td>
+      <td className={style.cell}>
+        <Link
+          to={`/user/${item.id}`}
+          className={style.rowLink}
+        >
+          {item.email}
+        </Link>
+      </td>
     </tr>
+
   );
 };
 

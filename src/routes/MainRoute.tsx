@@ -6,6 +6,7 @@ import {Layout} from 'antd';
 const MainPage = React.lazy(() => import('../components/MainPage/MainPage'));
 const UserList = React.lazy(() => import('../components/UserList/UserList'));
 const UserPage = React.lazy(() => import('../components/UserPage/UserPage'));
+const EditUser = React.lazy(() => import('../components/EditUser/EditUser'));
 
 export const MainRoute = () => {
   const {Content} = Layout;
@@ -20,6 +21,7 @@ export const MainRoute = () => {
               <Route exact path='/' component={MainPage}/>
               <Route exact path='/user_list' component={UserList}/>
               <Route exact path='/user/:userid' component={UserPage}/>
+              <Route exact path='/user/:userid/edit' component={EditUser}/>
             </Content>
           </Layout>
         </Layout>

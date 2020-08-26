@@ -16,6 +16,7 @@ export type UserType = {
     catchPhrase: string;
     bs: string;
   };
+  avatar: string
   email: string;
   id: number;
   name: string;
@@ -43,7 +44,7 @@ export class UsersStore implements UsersStoreType {
 
   @action
   userState = async () => {
-    const request = await fetch('https://jsonplaceholder.typicode.com/users/');
+    const request = await fetch('https://my-json-server.typicode.com/KsuBurn/myJsonServer/users');
     const response = await request.json();
     this.fullUserList = response;
     await action(() => this.userList = response)();
