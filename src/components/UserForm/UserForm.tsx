@@ -119,7 +119,7 @@ const UserForm: FC<UserFormType> = ({currentUserInfo, actionType}: UserFormType)
         break;
     }
   };
-  console.log(userInfo)
+
   return (
     <>
       <div className={style.form}>

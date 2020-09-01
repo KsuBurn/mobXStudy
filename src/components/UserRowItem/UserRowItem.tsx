@@ -1,6 +1,8 @@
 import React, {FC} from 'react';
 import style from './UserRowItem.module.css';
 import {Link} from 'react-router-dom';
+import CurrentButton from '../CurrentButton/CurrentButton';
+import {useStore} from '../../hooks/useStore';
 
 export type UserRowItemProps = {
   address: {
@@ -32,8 +34,12 @@ export type UserRowItemType = {
 }
 
 const UserRowItem: FC<UserRowItemType> = ({item}: UserRowItemType) => {
+  const {usersStore} = useStore();
 
-  console.log('ID', item)
+  const handleClick = (userId: number) => {
+    usersStore.deleteUser(userId)
+  };
+
   return (
     <tr className={style.row}>
       <td className={style.cell}>
@@ -67,6 +73,13 @@ const UserRowItem: FC<UserRowItemType> = ({item}: UserRowItemType) => {
         >
           {item.email}
         </Link>
+      </td>
+      <td>
+        <CurrentButton
+          buttonTitle='Del'
+          danger={true}
+          onClick={() => handleClick(item.id)}
+        />
       </td>
     </tr>
 

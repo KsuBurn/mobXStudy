@@ -35,6 +35,7 @@ export type UsersStoreType = {
   sortUsers: (sortedArray: UserType[]) => void;
   addUserItem: (userItem: UserType) => void;
   editUser: (userInfo: UserType) => void;
+  deleteUser: (userId: number) => void;
 }
 
 export class UsersStore implements UsersStoreType {
@@ -105,15 +106,14 @@ export class UsersStore implements UsersStoreType {
     this.userList = sortedArray;
   };
 
-  // Добавить функцию удаления
-  // @action
-  // deleteUser = (userId: number) => {
-  //   const newUserList = this.users.filter((item, index) => index !== userId);
-  //
-  //   this.users = newUserList;
-  //   this.saveLocal();
-  // };
-  //
+  @action
+  deleteUser = (userId: number) => {
+
+    const newUserList = this.userList.filter((item) => item.id !== userId);
+
+    action(() => this.userList = newUserList)();
+    this.saveLocal();
+  };
 
   @action
   editUser = (userInfo: UserType): void => {
