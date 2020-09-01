@@ -34,6 +34,7 @@ export type UsersStoreType = {
   filteredUsers: () => UserType[];
   sortUsers: (sortedArray: UserType[]) => void;
   addUserItem: (userItem: UserType) => void;
+  editUser: (userInfo: UserType) => void;
 }
 
 export class UsersStore implements UsersStoreType {
@@ -113,25 +114,20 @@ export class UsersStore implements UsersStoreType {
   //   this.saveLocal();
   // };
   //
-  // // Добавить функцию редактирования
-  // @action
-  // editUser = (userInfo: itemKeys, userId: number): void => {
-  //   const newUserList: itemKeys[] = this.users.map((item: itemKeys, index) => {
-  //     const newItem = { ...item };
-  //
-  //     if (index === userId) {
-  //       newItem.name.first = userInfo.name.first;
-  //       newItem.name.last = userInfo.name.last;
-  //       newItem.age = userInfo.age;
-  //     }
-  //
-  //     return newItem;
-  //   });
-  //
-  //   this.users = newUserList;
-  //   this.saveLocal();
-  // };
-  //
 
+  @action
+  editUser = (userInfo: UserType): void => {
+    const newUserList: UserType[] = this.userList.map((item: UserType) => {
+      let newItem = {...item};
 
-}
+      if (userInfo.id === item.id) {
+       newItem = {...userInfo};
+      }
+
+      return newItem;
+    });
+
+    action(() => this.userList = newUserList)()
+    this.saveLocal();
+  };
+};

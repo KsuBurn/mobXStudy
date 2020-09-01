@@ -100,7 +100,6 @@ const UserForm: FC<UserFormType> = ({currentUserInfo, actionType}: UserFormType)
   const handleClick = () => {
     switch (actionType) {
       case 'addition':
-        console.log('usersStore.userList.length + 1', usersStore.userList.length + 1)
         setUserInfo(userInfo => {
           if (userInfo != undefined) {
             return {
@@ -110,13 +109,13 @@ const UserForm: FC<UserFormType> = ({currentUserInfo, actionType}: UserFormType)
           }
         });
         if (userInfo != undefined) {
-          console.log(userInfo)
           usersStore.addUserItem(userInfo);
         } else {
           console.log('Ошибка, заполните поля')
         }
         break;
       case 'editing':
+        usersStore.editUser(userInfo!);
         break;
     }
   };
