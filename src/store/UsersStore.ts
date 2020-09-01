@@ -1,4 +1,5 @@
 import {observable, action} from 'mobx';
+import {getLocalStorage} from '../utils/getLocalStorage';
 
 export type UserType = {
   address: {
@@ -16,7 +17,7 @@ export type UserType = {
     catchPhrase: string;
     bs: string;
   };
-  avatar: string
+  avatar: string;
   email: string;
   id: number;
   name: string;
@@ -32,6 +33,7 @@ export type UsersStoreType = {
   updateFilter: (inputValue: string, placeholder: string) => void;
   filteredUsers: () => UserType[];
   sortUsers: (sortedArray: UserType[]) => void;
+  addUserItem: (userItem: UserType) => void;
 }
 
 export class UsersStore implements UsersStoreType {
@@ -44,14 +46,21 @@ export class UsersStore implements UsersStoreType {
 
   @action
   userState = async () => {
-    const request = await fetch('https://my-json-server.typicode.com/KsuBurn/myJsonServer/users');
-    const response = await request.json();
-    this.fullUserList = response;
-    await action(() => this.userList = response)();
-    this.saveLocal()
+    if (typeof localStorage.users === 'undefined') {
+      const request = await fetch('https://my-json-server.typicode.com/KsuBurn/myJsonServer/users');
+      const response = await request.json();
+      this.fullUserList = response;
+      await action(() => this.userList = response)();
+      this.saveLocal();
 
-    return this.userList;
-  }
+      return this.userList;
+    } else {
+      this.fullUserList = getLocalStorage('users');
+      await action(() => this.userList = getLocalStorage('users'))();
+
+      return this.userList;
+    }
+  };
 
 
   saveLocal() {
@@ -59,15 +68,13 @@ export class UsersStore implements UsersStoreType {
 
     lst.users = JSON.stringify(this.userList);
   }
-  //
-  // @action
-  // addUserItem = (userItem: object): void => {
-  //   // const guid = uuidv4();
-  //
-  //   // @ts-ignore
-  //   this.userList.push({ ...userItem, ...{ guid } });
-  //   this.saveLocal();
-  // };
+
+  @action
+  addUserItem = (userItem: UserType): void => {
+    this.userList.push({ ...userItem });
+    this.fullUserList.push({ ...userItem });
+    this.saveLocal();
+  };
 
   @action
   filteredUsers(): UserType[] {

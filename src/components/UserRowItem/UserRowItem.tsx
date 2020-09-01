@@ -33,6 +33,7 @@ export type UserRowItemType = {
 
 const UserRowItem: FC<UserRowItemType> = ({item}: UserRowItemType) => {
 
+  console.log('ID', item)
   return (
     <tr className={style.row}>
       <td className={style.cell}>
