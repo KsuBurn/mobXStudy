@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/MainPage/MainPage.tsx"],"names":["MainPage"],"mappings":"yGAAA,2BASeA,UAPM,WAEnB,OACE","file":"static/js/11.9d69b88b.chunk.js","sourcesContent":["import React, {FC} from 'react';\r\n\r\nconst MainPage: FC = () => {\r\n\r\n  return(\r\n    <div>main page</div>\r\n  )\r\n};\r\n\r\nexport default MainPage;\r\n"],"sourceRoot":""}
