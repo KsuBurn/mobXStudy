@@ -4,7 +4,9 @@ This application is made as part of the study of mobX and TS.
 You can see the result [here](https://ksuburn.github.io/mobXStudy/ ).<br>
 
 Application login details:
+
 login: ksu
+
 pass: 123456
 
 Application made with react, hooks, typescript, mobX, antD.
